@@ -2,6 +2,7 @@ import React, { useState, useReducer } from "react";
 
 import Editor from "../components/editor";
 import Theme from "../utils/theme.js";
+import LiveMode from "../components/LiveMode";
 
 function barilletReducer(state, action) {
   let newState;
@@ -49,9 +50,19 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="title">{"Éditeur de barillet"}</h1>
-
-      <Editor barillet={barillet} dispatchBarillet={dispatchBarillet} />
+      {view === "editor" ? (
+        <>
+          <Editor barillet={barillet} dispatchBarillet={dispatchBarillet} />
+          <button onClick={() => setView("liveMode")}>
+            Lancer le barillet
+          </button>
+        </>
+      ) : (
+        <>
+          <LiveMode barillet={barillet} />
+          <button onClick={() => setView("editor")}>Revenir à l'éditeur</button>
+        </>
+      )}
     </>
   );
 }
