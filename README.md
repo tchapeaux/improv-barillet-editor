@@ -2,7 +2,7 @@
 
 This project is intended for improv shows of the "Match" format (popular in the French-speaking world).In these shows, the referee prepares a "barillet" containing themes that will be drawn at random and played by the participants.
 
-This tool allows the referee to prepare the barillet in advance and in the correct format, then to export it in PDF format.
+This tool allows the referee to prepare the barillet in advance and in the correct format, then to export it as PDF.
 
 # Use it
 
