@@ -3,6 +3,8 @@ import React from "react";
 import { downloadObjectAsJson, readSingleFile } from "../utils/file-io.js";
 import ThemeCard from "./theme-card.jsx";
 
+import Theme from "../utils/theme.js";
+
 import {
   CARD_PLACEHOLDERS,
   FBIA_DEFAULT_BARILLET,
