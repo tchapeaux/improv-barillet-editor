@@ -45,6 +45,7 @@ export default function About() {
         </a>
         .
       </p>
+      <p>🎨 Aide à la conception: Banjopalmo.</p>
       <p>
         Envie de faire de l'impro à Bruxelles ? Va voir la{" "}
         <a href="https://www.fbia.be" target="_blank">
