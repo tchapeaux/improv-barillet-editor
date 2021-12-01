@@ -126,7 +126,6 @@ export default function Editor({ barillet, dispatchBarillet }) {
         ) : null}
       </div>
       <div className="barillet-options">
-        <button onClick={() => print()}>Exporter en PDF</button>
         <button
           onClick={() =>
             downloadObjectAsJson(
