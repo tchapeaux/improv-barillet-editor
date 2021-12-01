@@ -62,6 +62,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
         <div className="import-from-json">
           {"Charger depuis un JSON"}
           <input
+            accept=".json,application/json"
             onChange={(e) =>
               readSingleFile(
                 e,
