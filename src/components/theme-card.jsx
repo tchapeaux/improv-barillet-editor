@@ -2,10 +2,12 @@ import React, { useRef } from "react";
 
 export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
   function onChangeAttribute(attr, newValue) {
-    return onChangeTheme({
-      ...theme,
-      [attr]: newValue
-    });
+    if (onChangeTheme) {
+      return onChangeTheme({
+        ...theme,
+        [attr]: newValue,
+      });
+    }
   }
 
   function onToggleNature() {
@@ -18,7 +20,7 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
         <button
           className={`nature nature-${theme.nature}`}
           onClick={onToggleNature}
-          title={theme.nature === 'M' ? 'Mixte' : 'Comparée'}
+          title={theme.nature === "M" ? "Mixte" : "Comparée"}
         >
           {theme.nature}
         </button>
@@ -66,9 +68,11 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
           value={theme.extra}
         ></textarea>
 
-        <button className="del-card-btn" onClick={onDelete}>
-          supprimer
-        </button>
+        {onDelete ? (
+          <button className="del-card-btn" onClick={onDelete}>
+            supprimer
+          </button>
+        ) : null}
       </div>
     </>
   );
