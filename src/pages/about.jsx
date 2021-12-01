@@ -54,16 +54,16 @@ export default function About() {
         .
       </p>
       <p>
-        Hébergé sur{" "}
-        <a href="https://glitch.com/" target="_blank">
-          Glitch.com
+        Hébergé par{" "}
+        <a href="https://vercel.com" target="_blank">
+          Vercel
         </a>
         , code source disponible{" "}
         <a
-          href="https://glitch.com/edit/#!/improv-barillet-editor"
+          href="https://github.com/tchapeaux/improv-barillet-editor"
           target="_blank"
         >
-          ici
+          sur Github
         </a>
         .
       </p>
