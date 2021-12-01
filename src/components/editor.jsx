@@ -25,38 +25,45 @@ export default function Editor({ barillet, dispatchBarillet }) {
   return (
     <>
       <div className="barillet-options">
-        <button onClick={() => dispatchBarillet({ type: "reset" })}>
-          Vider
-        </button>
+        {countThemes > 0 ? (
+          <button onClick={() => dispatchBarillet({ type: "reset" })}>
+            Vider
+          </button>
+        ) : (
+          <>
+            <button
+              onClick={() =>
+                dispatchBarillet({
+                  type: "replace",
+                  payload: CARD_PLACEHOLDERS,
+                })
+              }
+            >
+              Exemple
+            </button>
 
-        <button
-          onClick={() =>
-            dispatchBarillet({ type: "replace", payload: CARD_PLACEHOLDERS })
-          }
-        >
-          Exemple
-        </button>
-
-        <button
-          onClick={() =>
-            dispatchBarillet({
-              type: "replace",
-              payload: FBIA_DEFAULT_BARILLET,
-            })
-          }
-        >
-          Barillet complet
-        </button>
-        <button
-          onClick={() =>
-            dispatchBarillet({
-              type: "replace",
-              payload: SMALL_BARILLET,
-            })
-          }
-        >
-          Mini-barillet
-        </button>
+            <button
+              onClick={() =>
+                dispatchBarillet({
+                  type: "replace",
+                  payload: FBIA_DEFAULT_BARILLET,
+                })
+              }
+            >
+              Barillet complet
+            </button>
+            <button
+              onClick={() =>
+                dispatchBarillet({
+                  type: "replace",
+                  payload: SMALL_BARILLET,
+                })
+              }
+            >
+              Mini-barillet
+            </button>
+          </>
+        )}
       </div>
       {barillet.length === 0 ? (
         <div className="import-from-json">
@@ -101,7 +108,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
         className="add-card-btn"
         onClick={() => dispatchBarillet({ type: "add" })}
       >
-        + Nouveau
+        Ajouter une impro
       </button>
       <div className="barillet-summary">
         <div>{`Total: ${countThemes} thème${countThemes > 1 ? "s" : ""}`}</div>

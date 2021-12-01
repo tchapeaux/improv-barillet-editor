@@ -39,15 +39,14 @@ export default function About() {
 
       <h2>Qui a fait ça</h2>
       <p>
-        🦓 Ce site est maintenu par{" "}
+        👯‍♂️ Web app par 🐢{" "}
         <a href="https://github.com/tchapeaux" target="_blank">
           tchapeaux
-        </a>
-        .
+        </a>{" "}
+        et 🎨 Banjopalmo.
       </p>
-      <p>🎨 Aide à la conception: Banjopalmo.</p>
       <p>
-        Envie de faire de l'impro à Bruxelles ? Va voir la{" "}
+        🦓 Envie de faire de l'impro à Bruxelles ? Va voir la{" "}
         <a href="https://www.fbia.be" target="_blank">
           FBIA
         </a>

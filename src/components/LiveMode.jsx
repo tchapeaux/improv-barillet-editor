@@ -79,8 +79,10 @@ export default function LiveMode({ barillet }) {
             {barillet.length - alreadySeenIds.current.size}
           </p>
           <ThemeCard theme={currentTheme} />
-          <button onClick={onSkip}>Garder pour plus tard</button>
-          <button onClick={onNext}>Impro suivante</button>
+          <div className="live-menu">
+            <button onClick={onSkip}>Garder pour plus tard</button>
+            <button onClick={onNext}>Impro suivante</button>
+          </div>
         </>
       )}
     </>

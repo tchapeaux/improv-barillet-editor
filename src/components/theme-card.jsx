@@ -40,6 +40,7 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
             }
             value={theme.nbJ}
           />
+          {"·"}
           <input
             className={`categorie${
               theme.categorie !== "L" ? " cate-not-libre" : ""

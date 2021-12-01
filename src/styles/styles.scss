@@ -8,13 +8,14 @@ to this section's matching END comment to see page-specific styles.
 ******************************************************************************/
 /* Our default values set as CSS variables */
 :root {
-  --color-bg: #ffffa0;
+  /* default */
   --color-text-main: #000000;
   --color-primary: #2800ff;
   --wrapper-height: 85vh;
-  --image-max-width: 320px;
-  --font-family: "HK Grotesk";
-  --font-family-header: "HK Grotesk";
+  /* from Figma */
+  --color-bg: #e5e5e5;
+  --color-gray-1: #333333;
+  --color-gray-6: #f2f2f2;
 }
 
 /* Basic page style resets */
@@ -38,6 +39,8 @@ to this section's matching END comment to see page-specific styles.
     format("opentype");
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 /* Navigation grid */
 .footer {
   display: flex;
@@ -47,25 +50,26 @@ to this section's matching END comment to see page-specific styles.
   width: 100%;
   flex-wrap: wrap;
   border-top: 4px solid #fff;
-}
 
-.footer a {
-  font-family: HK Grotesk;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.1rem;
-  color: #000;
-  text-decoration: none;
-  border-style: none;
-}
-.footer a:hover {
-  background: var(--color-primary);
-  color: white;
-}
+  a {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: #000;
+    text-decoration: none;
+    border-style: none;
 
-.footer .links {
-  padding: 0.5rem 1rem 1.5rem;
-  white-space: nowrap;
+    &:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+  }
+
+  .links {
+    padding: 0.5rem 1rem 1.5rem;
+    white-space: nowrap;
+  }
 }
 
 .divider {
@@ -77,7 +81,7 @@ END Glitch hello-app default styles
 
 /* Page structure */
 body {
-  font-family: HK Grotesk;
+  font-family: Inter;
   background-color: var(--color-bg);
 }
 .wrapper {
@@ -93,37 +97,44 @@ body {
   justify-content: space-between;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 350px) {
+    max-width: 350px;
+  }
 }
 
 /* Page titles */
 h1 {
   color: var(--color-primary);
-  font-family: HK Grotesk;
+  font-family: Inter;
   font-style: normal;
   font-weight: bold;
   font-size: 5rem;
   line-height: 105%;
 }
 
-.page p {
-  line-height: 1.5;
-}
+.page {
+  p {
+    line-height: 1.5;
+  }
 
-.page a {
-  color: #000;
-}
+  a {
+    color: #000;
+  }
 
-.page a:hover {
-  text-decoration: none;
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 /* Instructions */
 .instructions {
   margin: 1rem auto 0;
-}
-.instructions p {
-  font-size: 1rem;
-  max-width: 750px;
+
+  p {
+    font-size: 1rem;
+    max-width: 750px;
+  }
 }
 
 .import-from-json {
@@ -143,27 +154,40 @@ h2 {
 button {
   font-size: 1.3rem;
   cursor: pointer;
+
+  &:not(.nature) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 11px;
+
+    width: 100%;
+    background-color: var(--color-gray-1);
+    color: var(--color-gray-6);
+  }
 }
 
 .barillet-options {
   display: flex;
-  flex-wrap: wrap;
-}
+  flex-direction: column;
+  width: 100%;
 
-.barillet-options > * {
-  margin: 4px;
+  :not(:last-child) {
+    margin-bottom: 0.3em;
+  }
 }
 
 .barillet {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   margin: 0.5em;
   align-items: center;
   justify-content: center;
-}
 
-.barillet > * {
-  margin: 0.25em;
+  > * {
+    margin: 0.25em;
+  }
 }
 
 .theme-card {
@@ -173,98 +197,96 @@ button {
 
   break-inside: avoid;
 
-  max-width: 350px;
+  width: 100%;
   border: 1px solid black;
   padding: 14px;
 
   background-color: #ffffff88;
 
   font-size: 1.3rem;
-}
 
-.theme-card > * {
-  margin: 2px;
-  padding: 2p;
-}
+  > * {
+    margin: 2px;
+    padding: 2p;
+  }
 
-.theme-card .del-card-btn {
-  visibility: hidden;
-}
+  .del-card-btn {
+    visibility: hidden;
+  }
 
-.theme-card:hover .del-card-btn {
-  visibility: visible;
-}
+  &:hover .del-card-btn {
+    visibility: visible;
+  }
 
-.theme-card .nature {
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  .nature {
+    width: 1.5em;
+    height: 1.5em;
 
-  width: 1.5em;
-  height: 1.5em;
+    background-color: transparent;
+    padding: 2px;
+  }
 
-  background-color: transparent;
-  padding: 2px;
-}
+  .nature-C {
+    padding: 2px;
+    border-radius: 50%;
+  }
 
-.theme-card .nature-C {
-  padding: 2px;
-  border-radius: 50%;
-}
+  .categorie {
+    width: 60%;
+  }
 
-.theme-card .titre {
-  margin-left: 2em;
-  text-align: right;
-}
+  .cate-not-libre {
+    background-color: #cccccc;
+  }
 
-.theme-card .categorie {
-  text-align: right;
-  width: 60%;
-}
+  .double-row {
+    display: flex;
+    flex-direction: row;
+  }
 
-.theme-card .cate-not-libre {
-  background-color: #cccccc;
-}
+  .double-row .nbJ {
+    width: 35%;
+  }
 
-.theme-card .double-row {
-  display: flex;
-  flex-direction: row;
-}
+  .duree {
+    display: flex;
+    align-items: baseline;
+  }
 
-.theme-card .double-row .nbJ {
-  width: 35%;
-}
+  .extra {
+    font-size: 0.8em;
+  }
 
-.theme-card .duree {
-  display: flex;
-  align-items: baseline;
-}
+  .extra::placeholder {
+    opacity: 0.3;
+  }
 
-.theme-card .extra {
-  font-size: 0.8em;
-}
+  .duree input {
+    width: 2em;
+  }
 
-.theme-card .extra::placeholder {
-  opacity: 0.3;
-}
-
-.theme-card .duree input {
-  width: 2em;
-}
-
-.theme-card input,
-.theme-card textarea {
-  font-family: inherit;
-  font-size: inherit;
-  border: none;
-  background-color: transparent;
-  resize: none;
+  input,
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    background-color: transparent;
+    resize: none;
+  }
 }
 
 .barillet-summary {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.live-menu {
+  width: 100%;
+
+  > * {
+    margin: 0.5em 0;
+  }
 }
 
 @media print {
@@ -285,11 +307,11 @@ button {
     position: absolute;
     left: 0;
     top: 0;
-  }
 
-  .barillet .add-card-btn,
-  .barillet .del-card-btn {
-    visibility: hidden !important;
+    .add-card-btn,
+    .del-card-btn {
+      visibility: hidden !important;
+    }
   }
 
   .extra::placeholder {
