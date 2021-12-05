@@ -1,4 +1,4 @@
-/******************************************************************************
+/* *****************************************************************************
 START Glitch hello-app default styles
 
 The styles in this section do some minimal CSS resets, set default fonts and 
@@ -86,21 +86,11 @@ body {
 }
 .wrapper {
   min-height: var(--wrapper-height);
-  display: grid;
-  place-items: center;
-  margin: 0 1rem;
-  min-height: 86vh;
 }
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  justify-content: center;
-
-  @media screen and (min-width: 350px) {
-    max-width: 350px;
-  }
+  width: 100%;
+  display: grid;
+  // grid-template-columns: 1rem minmax(1fr, 1200px) 1rem;
 }
 
 /* Page titles */
@@ -179,15 +169,9 @@ button {
 }
 
 .barillet {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5em;
-  align-items: center;
-  justify-content: center;
-
-  > * {
-    margin: 0.25em;
-  }
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  grid-gap: 1rem;
 }
 
 .theme-card {
@@ -198,7 +182,6 @@ button {
   break-inside: avoid;
 
   width: 100%;
-  border: 1px solid black;
   padding: 14px;
 
   background-color: #ffffff88;
