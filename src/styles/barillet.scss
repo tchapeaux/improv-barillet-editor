@@ -1,0 +1,87 @@
+.barillet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.theme-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    break-inside: avoid;
+
+    width: 100%;
+    padding: 1rem;
+    border-radius: 4px;
+
+    background-color: var(--bg-secondary);
+
+    font-size: 1.3rem;
+
+    .del-card-btn {
+        visibility: hidden;
+    }
+
+    &:hover .del-card-btn {
+        visibility: visible;
+    }
+
+    .nature {
+        width: 1.5em;
+        height: 1.5em;
+
+        background-color: var(--bg-tertiary);
+        padding: 2px;
+    }
+
+    .nature-C {
+        padding: 2px;
+        border-radius: 50%;
+    }
+
+    .categorie {
+        width: 60%;
+    }
+
+    .cate-not-libre {
+        background-color: var(--bg-tertiary);
+    }
+
+    .double-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .double-row .nbJ {
+        width: 35%;
+    }
+
+    .duree {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .extra {
+        font-size: 0.8em;
+    }
+
+    .extra::placeholder {
+        opacity: 0.3;
+    }
+
+    .duree input {
+        width: 2em;
+    }
+
+    input,
+    textarea {
+        font-family: inherit;
+        font-size: inherit;
+        border: none;
+        background-color: transparent;
+        resize: none;
+        color: var(--text-main);
+    }
+}

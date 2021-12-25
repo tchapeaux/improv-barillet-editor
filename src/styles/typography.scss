@@ -1,0 +1,64 @@
+/* Import fonts */
+@font-face {
+    font-family: HK Grotesk;
+    src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+        format("opentype");
+}
+@font-face {
+    font-family: HK Grotesk;
+    font-weight: bold;
+    src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+        format("opentype");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/* Font-sizes */
+html {
+    font-size: 100%;
+}
+:root {
+    --base-fs: 1rem;
+    --ratio: 1.2;
+    --fs-xxs: calc(var(--base-fs) / var(--ratio) / var(--ratio));
+    --fs-xs: calc(var(--base-fs) / var(--ratio));
+    --fs-sm: var(--base-fs);
+    --fs-md: 112.5%;
+    --fs-lg: calc(var(--base-fs) * var(--ratio));
+    --fs-xl: calc(var(--fs-lg) * var(--ratio));
+    --fs-xxl: calc(var(--fs-xl) * var(--ratio));
+    --fs-xxxl: calc(var(--fs-xxl) * var(--ratio));
+}
+
+body{
+    font-family: Inter;
+    color: var(--text-main);
+    font-size: var(--fs-md);
+}
+
+a {
+
+    &:hover {
+        background: var(--accent-main);
+        color: var(--bg-main);
+    }
+}
+
+h1 {
+    font-family: Inter;
+    font-size: var(--fs-lg);
+}
+
+button {
+    cursor: pointer;
+    font-size: var(--fs-md);
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 2px;
+    color: var(--text-main);
+
+    &:not(.nature) {
+        background-color: var(--bg-tertiary);
+        color: var(--text-main);
+    }
+}

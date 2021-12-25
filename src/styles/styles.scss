@@ -1,3 +1,8 @@
+@import "colors.scss";
+@import "typography.scss";
+@import "barillet.scss";
+@import "print.scss";
+
 /* *****************************************************************************
 START Glitch hello-app default styles
 
@@ -6,305 +11,93 @@ colors, and handle the layout for our footer and "Remix on Glitch" button. If
 you're new to CSS they may seem a little complicated, but you can scroll down
 to this section's matching END comment to see page-specific styles.
 ******************************************************************************/
-/* Our default values set as CSS variables */
-:root {
-  /* default */
-  --color-text-main: #000000;
-  --color-primary: #2800ff;
-  --wrapper-height: 85vh;
-  /* from Figma */
-  --color-bg: #e5e5e5;
-  --color-gray-1: #333333;
-  --color-gray-6: #f2f2f2;
+
+:root{
+    --wrapper-height: 85vh;
 }
 
 /* Basic page style resets */
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 [hidden] {
-  display: none !important;
+    display: none !important;
 }
-
-/* Import fonts */
-@font-face {
-  font-family: HK Grotesk;
-  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
-    format("opentype");
-}
-@font-face {
-  font-family: HK Grotesk;
-  font-weight: bold;
-  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
-    format("opentype");
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 /* Navigation grid */
 .footer {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem auto 0;
-  padding: 1rem 0 0.75rem 0;
-  width: 100%;
-  flex-wrap: wrap;
-  border-top: 4px solid #fff;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem auto 0;
+    padding: 1rem 0 0.75rem 0;
+    width: 100%;
+    flex-wrap: wrap;
+    border-top: 4px solid #fff;
 
-  a {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.1rem;
-    color: #000;
-    text-decoration: none;
-    border-style: none;
-
-    &:hover {
-      background: var(--color-primary);
-      color: white;
+    .links {
+        padding: 0.5rem 1rem 1.5rem;
+        white-space: nowrap;
     }
-  }
-
-  .links {
-    padding: 0.5rem 1rem 1.5rem;
-    white-space: nowrap;
-  }
 }
 
 .divider {
-  padding: 0 1rem;
+    padding: 0 1rem;
 }
+
 /******************************************************************************
 END Glitch hello-app default styles
 ******************************************************************************/
 
 /* Page structure */
 body {
-  font-family: Inter;
-  background-color: var(--color-bg);
+    font-family: Inter;
+    background-color: var(--bg-main);
+    margin: 0;
 }
+
 .wrapper {
-  min-height: var(--wrapper-height);
+    padding: 1rem 0;
+    min-height: var(--wrapper-height);
+    display: grid;
+    grid-template-columns: 1rem minmax(calc(100% - 2rem), 1200px) 1rem;
 }
+
 .content {
-  width: 100%;
-  display: grid;
-  // grid-template-columns: 1rem minmax(1fr, 1200px) 1rem;
-}
-
-/* Page titles */
-h1 {
-  color: var(--color-primary);
-  font-family: Inter;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 5rem;
-  line-height: 105%;
-}
-
-.page {
-  p {
-    line-height: 1.5;
-  }
-
-  a {
-    color: #000;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
-}
-
-/* Instructions */
-.instructions {
-  margin: 1rem auto 0;
-
-  p {
-    font-size: 1rem;
-    max-width: 750px;
-  }
+    width: 100%;
+    grid-column: 2 / -2;
 }
 
 .import-from-json {
-  display: flex;
-  flex-direction: column;
-  margin: 1em;
-  padding: 0.5em;
-  text-align: center;
-  border: 2px solid var(--color-primary);
-  font-size: 1.1rem;
-}
-
-h2 {
-  color: var(--color-primary);
-}
-
-button {
-  font-size: 1.3rem;
-  cursor: pointer;
-
-  &:not(.nature) {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 13px 11px;
-
-    width: 100%;
-    background-color: var(--color-gray-1);
-    color: var(--color-gray-6);
-  }
+    flex-direction: column;
+    padding: 0.5em;
+    text-align: center;
+    border: 2px solid var(--bg-tertiary);
+    font-size: 1.1rem;
 }
 
 .barillet-options {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  :not(:last-child) {
-    margin-bottom: 0.3em;
-  }
-}
-
-.barillet {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
-}
-
-.theme-card {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  break-inside: avoid;
-
-  width: 100%;
-  padding: 14px;
-
-  background-color: #ffffff88;
-
-  font-size: 1.3rem;
-
-  > * {
-    margin: 2px;
-    padding: 2p;
-  }
-
-  .del-card-btn {
-    visibility: hidden;
-  }
-
-  &:hover .del-card-btn {
-    visibility: visible;
-  }
-
-  .nature {
-    width: 1.5em;
-    height: 1.5em;
-
-    background-color: transparent;
-    padding: 2px;
-  }
-
-  .nature-C {
-    padding: 2px;
-    border-radius: 50%;
-  }
-
-  .categorie {
-    width: 60%;
-  }
-
-  .cate-not-libre {
-    background-color: #cccccc;
-  }
-
-  .double-row {
     display: flex;
-    flex-direction: row;
-  }
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    margin-bottom: 1rem;
 
-  .double-row .nbJ {
-    width: 35%;
-  }
-
-  .duree {
-    display: flex;
-    align-items: baseline;
-  }
-
-  .extra {
-    font-size: 0.8em;
-  }
-
-  .extra::placeholder {
-    opacity: 0.3;
-  }
-
-  .duree input {
-    width: 2em;
-  }
-
-  input,
-  textarea {
-    font-family: inherit;
-    font-size: inherit;
-    border: none;
-    background-color: transparent;
-    resize: none;
-  }
+    @media screen and (min-width: 700px) {
+        flex-direction: row;
+    }
 }
 
 .barillet-summary {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .live-menu {
-  width: 100%;
+    width: 100%;
 
-  > * {
-    margin: 0.5em 0;
-  }
-}
-
-@media print {
-  html {
-    background-color: #fff;
-  }
-
-  body * {
-    visibility: hidden;
-    background-color: #fff;
-  }
-  .barillet,
-  .barillet * {
-    visibility: visible;
-  }
-  .barillet {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    .add-card-btn,
-    .del-card-btn {
-      visibility: hidden !important;
+    > * {
+        margin: 0.5em 0;
     }
-  }
-
-  .extra::placeholder {
-    visibility: hidden;
-    display: none;
-    color: transparent;
-  }
-
-  .theme-card .cate-not-libre {
-    background-color: #ddd;
-    -webkit-print-color-adjust: exact;
-  }
 }
