@@ -20,25 +20,61 @@
 
     font-size: 1.3rem;
 
-    .del-card-btn {
-        visibility: hidden;
+    // Delete button visible on small screens (since media query for touch devices isn't very well supported yet)
+    @media screen and (max-width: 1200px){
+        .del-card-btn{
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            overflow: hidden;
+            text-indent: -1000px;
+
+            &:after{
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                height: 100%;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23cb898f'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: 50%;
+            }
+        }
     }
 
-    &:hover .del-card-btn {
-        visibility: visible;
+    @media screen and (min-width: 1200px){
+        .del-card-btn {
+            visibility: hidden;
+        }
+        
+        &:hover .del-card-btn {
+            visibility: visible;
+        }
     }
 
     .nature {
         width: 1.5em;
         height: 1.5em;
-
+        margin-bottom: 1rem;
         background-color: var(--bg-tertiary);
         padding: 2px;
     }
 
     .nature-C {
-        padding: 2px;
         border-radius: 50%;
+    }
+
+    .titre{
+        font-size: var(--fs-xxl);
+        margin-bottom: 1rem;
+    }
+
+    .categorie, .duree, .nbJ{
+        color: var(--text-secondary);
     }
 
     .categorie {
@@ -50,17 +86,21 @@
     }
 
     .double-row {
-        display: flex;
-        flex-direction: row;
-    }
+        display: grid;
+        gap: 1rem;
+        grid-template-rows: 1fr 1fr;
 
-    .double-row .nbJ {
-        width: 35%;
+        // @media screen and (min-width: 500px){
+        //     grid-template-rows: none;
+        //     grid-template-columns: repeat(2, calc(50% - .5rem));
+        // }
+        
     }
 
     .duree {
         display: flex;
         align-items: baseline;
+        margin: 1rem 0;
     }
 
     .extra {
