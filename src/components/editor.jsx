@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { downloadObjectAsJson, readSingleFile } from "../utils/file-io.js";
 import ThemeCard from "./theme-card.jsx";
@@ -21,6 +21,8 @@ export default function Editor({ barillet, dispatchBarillet }) {
   const countC = barillet.filter((t) => t.nature === "C").length;
   const countL = barillet.filter((t) => t.categorie === "L").length;
   const countNotL = barillet.filter((t) => t.categorie !== "L").length;
+
+  const [viewType, setViewType] = useState("grid");
 
   return (
     <>
@@ -86,23 +88,88 @@ export default function Editor({ barillet, dispatchBarillet }) {
         </div>
       ) : null}
       {barillet.length > 0 ? (
-        <div className="barillet">
-          {barillet.map((card) => (
-            <ThemeCard
-              key={card.id}
-              onDelete={() =>
-                dispatchBarillet({ type: "remove", payload: card.id })
-              }
-              onChangeTheme={(newTheme) =>
-                dispatchBarillet({
-                  type: "update",
-                  payload: { ...newTheme, id: card.id },
-                })
-              }
-              theme={card}
-            />
-          ))}
-        </div>
+        <>
+          <div className="barillet-view-options">
+            <button
+              onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
+            >
+              👁️ {viewType == "grid" ? "List" : "Grid"}
+            </button>
+          </div>
+
+          {viewType === "grid" ? (
+            <div className="barillet-grid">
+              {barillet.map((card) => (
+                <ThemeCard
+                  key={card.id}
+                  onDelete={() =>
+                    dispatchBarillet({ type: "remove", payload: card.id })
+                  }
+                  onChangeTheme={(newTheme) =>
+                    dispatchBarillet({
+                      type: "update",
+                      payload: { ...newTheme, id: card.id },
+                    })
+                  }
+                  theme={card}
+                />
+              ))}
+            </div>
+          ) : null}
+
+          {viewType === "list" ? (
+            <div className="barillet-list">
+              {barillet.map((theme) => {
+                const onUpdateProp = (propName, propValue) => {
+                  dispatchBarillet({
+                    type: "update",
+                    payload: { ...theme, [propName]: propValue },
+                  });
+                };
+
+                return (
+                  <div className="list-row" key={theme.id}>
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("nature", value)
+                      }
+                      value={theme.nature}
+                    />
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("titre", value)
+                      }
+                      value={theme.titre}
+                    />
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("nbJ", value)
+                      }
+                      value={theme.nbJ}
+                    />
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("categorie", value)
+                      }
+                      value={theme.categorie}
+                    />
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("duree", value)
+                      }
+                      value={theme.duree}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
+        </>
       ) : null}
       <button
         className="add-card-btn"
