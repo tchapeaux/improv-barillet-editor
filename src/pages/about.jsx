@@ -14,19 +14,15 @@ export default function About() {
       <div className="instructions">
         <h2>Mais qu'est-ce que c'est</h2>
         <p>
-          Cet outil vous permet de créer des barillets de matchs
-          d'improvisation.
-        </p>
-        <p>
-          Composez votre barillet ci-dessus puis exportez-le en PDF pour pouvoir
-          l'imprimer. Pour un meilleur rendu, veuillez utiliser le navigateur
-          Chrome.
+          Cet outil vous permet de créer, partager et utiliser des barillets
+          pour des matchs d'improvisation.
         </p>
 
         <p>
           Les changements sont enregistrés dans votre navigateur, vous pouvez
           donc fermer la page et reprendre votre édition plus tard. Vous pouvez
-          également sauvegarder puis ré-importer un barillet.
+          également sauvegarder puis ré-importer un barillet ou partager un
+          barillet par URL.
         </p>
 
         <p>
