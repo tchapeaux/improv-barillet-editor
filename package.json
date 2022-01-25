@@ -2,9 +2,10 @@
   "name": "improv-barillet-editor",
   "version": "0.0.3",
   "description": "An editor for improv matches barillets.",
+  "source": "./index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -23,9 +24,6 @@
     ">0.2%",
     "not dead"
   ],
-  "engines": {
-    "node": "12.x"
-  },
   "repository": {
     "url": "https://github.com/tchapeaux/improv-barillet-editor/"
   }
