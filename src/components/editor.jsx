@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { downloadObjectAsJson, readSingleFile } from "../utils/file-io.js";
+import { copyDataURL } from "../utils/copy-data-url";
 
 import {
   CateRatioCheck,
@@ -17,10 +18,6 @@ import {
   SMALL_BARILLET,
 } from "../utils/data";
 
-function percent(value, total) {
-  return Math.floor((100 * Number(value)) / Number(total));
-}
-
 export default function Editor({ barillet, dispatchBarillet }) {
   const countThemes = barillet.length;
   const countM = barillet.filter((t) => t.nature === "M").length;
@@ -29,6 +26,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
   const countNotL = barillet.filter((t) => t.categorie !== "L").length;
 
   const [viewType, setViewType] = useState("grid");
+  const [isCopied, setIsCopied] = useState(false);
 
   return (
     <>
@@ -225,6 +223,15 @@ export default function Editor({ barillet, dispatchBarillet }) {
           }
         >
           Sauvegarder en JSON
+        </button>
+        <button
+          onClick={() => {
+            copyDataURL(barillet);
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 3000);
+          }}
+        >
+          {isCopied ? "Copié dans le presse-papier" : "Partager une copie"}
         </button>
       </div>
     </>

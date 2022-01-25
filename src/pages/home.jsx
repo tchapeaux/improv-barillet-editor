@@ -1,4 +1,5 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+import LZUTF8 from "lzutf8";
 
 import Editor from "../components/editor";
 import Theme from "../utils/theme.js";
@@ -20,7 +21,7 @@ function barilletReducer(state, action) {
       );
       break;
     case "reset":
-      alert("Are you sure you want to empty this barillet?");
+      alert("Voulez-vous vraiment vider ce barillet ?");
       newState = [];
       break;
     case "replace":
@@ -28,12 +29,53 @@ function barilletReducer(state, action) {
       break;
   }
 
-  localStorage.setItem("barillet", JSON.stringify(newState));
+  if (newState !== undefined) {
+    localStorage.setItem("barillet", JSON.stringify(newState));
+  }
 
   return newState;
 }
 
-const barilletFromStorage = localStorage.getItem("barillet");
+function getBarilletFromUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const barilletDataBase64 = params.get("barilletDataBase64");
+
+  if (barilletDataBase64) {
+    try {
+      console.log("DECODING");
+      console.log(barilletDataBase64);
+
+      const decodedJson = LZUTF8.decompress(barilletDataBase64, {
+        inputEncoding: "Base64",
+      });
+
+      const data = JSON.parse(decodedJson);
+      console.log("new barillet", data);
+      return data;
+    } catch (err) {
+      // Ignore invalid base64 strings
+      if (err.message?.includes("Invalid Base64 string")) {
+        return console.error(
+          "Could not parse barillet data from URL",
+          err.message
+        );
+      }
+
+      // Ignore invalid JSON
+      if (err instanceof SyntaxError && err.message?.includes("JSON.parse")) {
+        return console.error(
+          "Could not parse barillet data from URL",
+          err.message
+        );
+      }
+
+      throw err;
+    } finally {
+      // Remove the params if they exist
+      history.replaceState(null, "", window.location.origin);
+    }
+  }
+}
 
 /**
  * The Home function defines the content that makes up the main content of the Home page
@@ -43,11 +85,21 @@ const barilletFromStorage = localStorage.getItem("barillet");
  */
 
 export default function Home() {
-  const [barillet, dispatchBarillet] = useReducer(
-    barilletReducer,
-    barilletFromStorage ? JSON.parse(barilletFromStorage) : []
-  );
+  const [barillet, dispatchBarillet] = useReducer(barilletReducer, []);
   const [view, setView] = useState("editor");
+
+  // initialize barillet
+  useEffect(() => {
+    const barilletFromStorage = JSON.parse(
+      localStorage.getItem("barillet") || "[]"
+    );
+    const barilletFromURL = getBarilletFromUrlParams();
+    const initBarillet = barilletFromURL || barilletFromStorage;
+
+    if (initBarillet) {
+      dispatchBarillet({ type: "replace", payload: initBarillet });
+    }
+  }, []);
 
   return (
     <>
