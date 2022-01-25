@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
 import { downloadObjectAsJson, readSingleFile } from "../utils/file-io.js";
+
+import {
+  CateRatioCheck,
+  NatureRatioCheck,
+  TotalCardsCheck,
+} from "./CheckIndicator.jsx";
 import ThemeCard from "./theme-card.jsx";
 
 import Theme from "../utils/theme.js";
@@ -178,16 +184,26 @@ export default function Editor({ barillet, dispatchBarillet }) {
         Ajouter une impro
       </button>
       <div className="barillet-summary">
-        <div>{`Total: ${countThemes} thème${countThemes > 1 ? "s" : ""}`}</div>
+        <TotalCardsCheck nbOfThemes={countThemes} />
         {countThemes > 0 ? (
           <>
+            <NatureRatioCheck
+              nbOfC={countC}
+              nbOfM={countM}
+              nbOfThemes={countThemes}
+            />
+            <CateRatioCheck
+              nbOfCate={countNotL}
+              nbOfL={countL}
+              nbOfThemes={countThemes}
+            />
             <div>
-              {countM} M / {countC} C ({percent(countM, countThemes)} % /{" "}
-              {percent(countC, countThemes)} %){" "}
-            </div>
-            <div>
-              {countL} L / {countNotL} catés ({percent(countL, countThemes)} % /{" "}
-              {percent(countNotL, countThemes)} %){" "}
+              <a
+                href="https://drive.google.com/file/d/1LhHamiDoLfvjBT-eljnxLvvovdtNO5Tv/view?usp=sharing"
+                target="_blank"
+              >
+                Liste des catégories
+              </a>
             </div>
           </>
         ) : null}
