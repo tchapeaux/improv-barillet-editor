@@ -1,37 +1,63 @@
-
 @media print {
-  html {
-    background-color: #fff;
-  }
+  html,
+  body {
+    background-color: var(--print-bg-color);
+    color: var(--print-text-color);
 
-  body * {
-    visibility: hidden;
-    background-color: #fff;
-  }
-  .barillet,
-  .barillet * {
-    visibility: visible;
-  }
-  .barillet {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
+    .barillet-options,
+    .barillet-view-options,
+    .barillet-summary,
+    .footer {
+      display: none;
+    }
 
     .add-card-btn,
     .del-card-btn {
-      visibility: hidden !important;
+      visibility: hidden;
     }
-  }
 
-  .extra::placeholder {
-    visibility: hidden;
-    display: none;
-    color: transparent;
-  }
+    .barillet {
+      background-color: white;
+      color: var(--print-text-color);
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
 
-  .theme-card .cate-not-libre {
-    background-color: #ddd;
-    -webkit-print-color-adjust: exact;
+    .barillet-grid {
+      display: block;
+    }
+
+    .theme-card {
+      page-break-inside: avoid;
+      border: 1px solid var(--print-text-color);
+    }
+
+    .wrapper,
+    .theme-card {
+      background-color: var(--print-bg-color);
+      color: var(--print-text-color);
+
+      input,
+      textarea,
+      .nature,
+      .nbJ,
+      .categorie,
+      .duree {
+        background-color: var(--print-bg-color);
+        color: var(--print-text-color);
+      }
+
+      .extra::placeholder {
+        color: transparent;
+      }
+
+      .cate-not-libre {
+        background-color: #ddd;
+        color: var(--print-text-color);
+        -webkit-print-color-adjust: exact;
+      }
+    }
   }
 }

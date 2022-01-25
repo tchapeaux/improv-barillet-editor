@@ -20,6 +20,7 @@ function barilletReducer(state, action) {
       );
       break;
     case "reset":
+      alert("Are you sure you want to empty this barillet?");
       newState = [];
       break;
     case "replace":
