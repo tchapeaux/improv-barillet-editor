@@ -170,6 +170,13 @@ export default function Editor({ barillet, dispatchBarillet }) {
                       }
                       value={theme.duree}
                     />
+                    <input
+                      type="text"
+                      onChange={({ target: { value } }) =>
+                        onUpdateProp("extra", value)
+                      }
+                      value={theme.extra}
+                    />
                   </div>
                 );
               })}
