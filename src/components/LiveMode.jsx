@@ -15,6 +15,7 @@ export default function LiveMode({ barillet }) {
   const alreadySeenIds = useRef(new Set());
 
   useEffect(reset, []);
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
 
   if (barillet.length === 0) {
     return "Votre barillet est vide";
@@ -47,6 +48,7 @@ export default function LiveMode({ barillet }) {
   function onNext() {
     alreadySeenIds.current.add(currentId);
     setCurrentId(getNextId());
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function onSkip() {
@@ -60,6 +62,7 @@ export default function LiveMode({ barillet }) {
       nextId = getNextId();
     }
     setCurrentId(nextId);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const currentTheme = barillet.find((t) => t.id === currentId);
@@ -77,10 +80,10 @@ export default function LiveMode({ barillet }) {
           <ThemeCard theme={currentTheme} />
           <div className="live-menu">
             <button onClick={onSkip}>Garder pour plus tard</button>
-              <p>
-                Vues: {alreadySeenIds.current.size} / Restantes :
-                {barillet.length - alreadySeenIds.current.size}
-              </p>
+            <p>
+              Vues: {alreadySeenIds.current.size} / Restantes :
+              {barillet.length - alreadySeenIds.current.size}
+            </p>
             <button onClick={onNext}>Impro suivante</button>
           </div>
         </>
