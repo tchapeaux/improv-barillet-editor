@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-
+import LiveProgress from "./LiveProgress";
 import ThemeCard from "./theme-card";
 
 function randomIntUpTo(max) {
@@ -14,8 +14,15 @@ export default function LiveMode({ barillet }) {
   const [currentId, setCurrentId] = useState(null);
   const alreadySeenIds = useRef(new Set());
 
-  useEffect(reset, []);
-  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
+  function reset() {
+    alreadySeenIds.current = new Set();
+    const randomTheme =
+      barillet.length > 0 ? barillet[randomIntUpTo(count - 1)] : null;
+    setCurrentId(randomTheme ? randomTheme.id : null);
+  }
+
+  useEffect(reset, [barillet]);
+  useEffect(() => window.scrollTo({ top: 0 }), []);
 
   if (barillet.length === 0) {
     return "Votre barillet est vide";
@@ -24,13 +31,6 @@ export default function LiveMode({ barillet }) {
   if (currentId === null && alreadySeenIds.current.size === 0) {
     // loading
     return null;
-  }
-
-  function reset() {
-    alreadySeenIds.current = new Set();
-    const randomTheme =
-      barillet.length > 0 ? barillet[randomIntUpTo(count - 1)] : null;
-    setCurrentId(randomTheme ? randomTheme.id : null);
   }
 
   function getNextId() {
@@ -79,11 +79,11 @@ export default function LiveMode({ barillet }) {
         <>
           <ThemeCard theme={currentTheme} />
           <div className="live-menu">
+            <LiveProgress
+              alreadySeenIds={alreadySeenIds.current}
+              barillet={barillet}
+            />
             <button onClick={onSkip}>Garder pour plus tard</button>
-            <p>
-              Vues: {alreadySeenIds.current.size} / Restantes :
-              {barillet.length - alreadySeenIds.current.size}
-            </p>
             <button onClick={onNext}>Impro suivante</button>
           </div>
         </>
