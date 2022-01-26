@@ -1,10 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
+
+const BUBBLE_STATES = {
+  SEEN: "seen",
+  SKIPPED: "skipped",
+  EMPTY: "empty",
+};
+
+function Bubble({ state }) {
+  return <div className={`progress-bubble ${state}`}></div>;
+}
 
 export default function LiveProgress({ barillet, alreadySeenIds }) {
   return (
-    <p className="live-progress">
-      Vues: {alreadySeenIds.size} / Restantes :
-      {barillet.length - alreadySeenIds.size}
-    </p>
+    <div className="live-progress">
+      {barillet
+        .filter((impro) => alreadySeenIds.has(impro.id))
+        .map((impro) => (
+          <Bubble key={impro.id} state={BUBBLE_STATES.SEEN} />
+        ))}
+      {barillet
+        .filter((impro) => !alreadySeenIds.has(impro.id))
+        .map((impro) => (
+          <Bubble key={impro.id} state={BUBBLE_STATES.EMPTY} />
+        ))}
+    </div>
   );
 }

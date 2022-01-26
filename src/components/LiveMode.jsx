@@ -78,11 +78,11 @@ export default function LiveMode({ barillet }) {
       ) : (
         <>
           <ThemeCard theme={currentTheme} />
+          <LiveProgress
+            alreadySeenIds={alreadySeenIds.current}
+            barillet={barillet}
+          />
           <div className="live-menu">
-            <LiveProgress
-              alreadySeenIds={alreadySeenIds.current}
-              barillet={barillet}
-            />
             <button onClick={onSkip}>Garder pour plus tard</button>
             <button onClick={onNext}>Impro suivante</button>
           </div>
