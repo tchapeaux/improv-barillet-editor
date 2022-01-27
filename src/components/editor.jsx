@@ -231,7 +231,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
             setTimeout(() => setIsCopied(false), 3000);
           }}
         >
-          {isCopied ? "Copié dans le presse-papier" : "Partager une copie"}
+          {isCopied ? "✅ Copié dans le presse-papier" : "Partager une copie"}
         </button>
       </div>
     </>
