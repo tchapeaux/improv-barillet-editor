@@ -107,13 +107,15 @@ export default function Home() {
         <>
           <Editor barillet={barillet} dispatchBarillet={dispatchBarillet} />
           <button onClick={() => setView("liveMode")}>
-            Lancer le barillet
+            🚂 Lancer le barillet
           </button>
         </>
       ) : (
         <>
           <LiveMode barillet={barillet} />
-          <button onClick={() => setView("editor")}>Revenir à l'éditeur</button>
+          <button onClick={() => setView("editor")}>
+            🔙 Revenir à l'éditeur
+          </button>
         </>
       )}
     </>

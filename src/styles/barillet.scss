@@ -1,3 +1,11 @@
+.barillet-view-options {
+  padding-bottom: 1rem;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
 .barillet-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

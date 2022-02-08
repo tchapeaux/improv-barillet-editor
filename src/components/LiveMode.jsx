@@ -71,10 +71,10 @@ export default function LiveMode({ barillet }) {
   return (
     <>
       {hasSeenAllThemes ? (
-        <>
+        <div className="live-menu-end">
           <p>Vous avez vu tous les thèmes !</p>
           <button onClick={reset}>Recommencer</button>
-        </>
+        </div>
       ) : (
         <>
           <ThemeCard theme={currentTheme} />
@@ -82,7 +82,7 @@ export default function LiveMode({ barillet }) {
             alreadySeenIds={alreadySeenIds.current}
             barillet={barillet}
           />
-          <div className="live-menu">
+          <div className="live-menu-controls">
             <button onClick={onSkip}>Garder pour plus tard</button>
             <button onClick={onNext}>Impro suivante</button>
           </div>

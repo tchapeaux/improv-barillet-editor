@@ -33,7 +33,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
       <div className="barillet-options">
         {countThemes > 0 ? (
           <button onClick={() => dispatchBarillet({ type: "reset" })}>
-            Vider
+            ♻️ Vider
           </button>
         ) : (
           <>
@@ -222,7 +222,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
             )
           }
         >
-          Sauvegarder en JSON
+          💾 Sauvegarder en JSON
         </button>
         <button
           onClick={() => {
@@ -231,7 +231,9 @@ export default function Editor({ barillet, dispatchBarillet }) {
             setTimeout(() => setIsCopied(false), 3000);
           }}
         >
-          {isCopied ? "✅ Copié dans le presse-papier" : "Partager une copie"}
+          {isCopied
+            ? "✅ Copié dans le presse-papier"
+            : "🔗 Partager une copie"}
         </button>
       </div>
     </>
