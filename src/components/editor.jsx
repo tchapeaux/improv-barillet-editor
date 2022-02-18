@@ -66,7 +66,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
                 })
               }
             >
-              Mini-barillet
+              Demi-barillet
             </button>
           </>
         )}
