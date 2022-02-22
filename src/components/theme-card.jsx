@@ -1,4 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
+
+const VALID_URL_REGEX = /https?:\/\/[^ ]*/g;
 
 export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
   function onChangeAttribute(attr, newValue) {
@@ -13,6 +15,10 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
   function onToggleNature() {
     return onChangeAttribute("nature", theme.nature === "M" ? "C" : "M");
   }
+
+  const urlsInExtra =
+    theme.extra &&
+    [...theme.extra.matchAll(VALID_URL_REGEX)].map((match) => match[0]);
 
   return (
     <>
@@ -67,6 +73,11 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
           placeholder="Ajouter des infos suppl. ici"
           value={theme.extra}
         ></textarea>
+        {urlsInExtra && urlsInExtra.length > 0 ? (
+          <a href={urlsInExtra[0]} target="_blank">
+            link
+          </a>
+        ) : null}
 
         {onDelete ? (
           <button className="del-card-btn" onClick={onDelete}>
