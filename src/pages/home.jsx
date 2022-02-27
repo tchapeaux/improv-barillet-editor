@@ -6,7 +6,7 @@ import Theme from "../utils/theme.js";
 import LiveMode from "../components/LiveMode";
 
 function barilletReducer(state, action) {
-  let newState;
+  let newState = state;
 
   switch (action.type) {
     case "add":
@@ -21,15 +21,17 @@ function barilletReducer(state, action) {
       );
       break;
     case "reset":
-      alert("Voulez-vous vraiment vider ce barillet ?");
-      newState = [];
+      const ok = confirm("Voulez-vous vraiment vider ce barillet ?");
+      if (ok) {
+        newState = [];
+      }
       break;
     case "replace":
       newState = [...action.payload];
       break;
   }
 
-  if (newState !== undefined) {
+  if (newState !== undefined && newState !== state) {
     localStorage.setItem("barillet", JSON.stringify(newState));
   }
 
