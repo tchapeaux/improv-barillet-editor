@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function percent(value, total) {
-  return Math.floor((100 * Number(value)) / Number(total));
-}
+import percent from "../utils/percent.js";
 
 export function CheckIndicator({ content, isValid }) {
   return (

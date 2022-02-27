@@ -134,22 +134,30 @@ body {
 }
 
 .live-progress {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: 1rem;
+  .live-progress-stats {
+    display: flex;
+    flex-direction: column;
+  }
 
-  .progress-bubble {
-    width: 1rem;
-    height: 1rem;
-    background-color: gray;
-    margin: 0.1rem;
-    border-radius: 50%;
-    transition: background-color 5s ease;
+  .live-progress-bubbles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem;
 
-    &.seen {
-      background-color: green;
+    .progress-bubble {
+      width: 1rem;
+      height: 1rem;
+      background-color: gray;
+      margin: 0.1rem;
+      border-radius: 50%;
+      transition: background-color 5s ease;
+
+      &.seen {
+        background-color: green;
+      }
     }
   }
 }
