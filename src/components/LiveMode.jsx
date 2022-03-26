@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import LiveProgress from "./LiveProgress";
+import LiveProgress from "./LiveProgress/LiveProgress";
 import ThemeCard from "./theme-card";
 
 function randomIntUpTo(max) {

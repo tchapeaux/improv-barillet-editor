@@ -134,9 +134,18 @@ body {
 }
 
 .live-progress {
+  max-width: 600px;
+
   .live-progress-stats {
     display: flex;
     flex-direction: column;
+  }
+
+  .balance-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .live-progress-bubbles {
