@@ -10,24 +10,39 @@ function barilletReducer(state, action) {
 
   switch (action.type) {
     case "add":
-      newState = [...state, new Theme(action.payload)];
+      newState = {
+        name: state.name,
+        impros: [...state.impros, new Theme(action.payload)],
+      };
       break;
     case "remove":
-      newState = state.filter((card) => card.id !== action.payload);
+      newState = {
+        name: state.name,
+        impros: state.impros.filter((card) => card.id !== action.payload),
+      };
       break;
     case "update":
-      newState = state.map((card) =>
-        card.id === action.payload.id ? action.payload : card
-      );
+      newState = {
+        name: state.name,
+        impros: state.impros.map((card) =>
+          card.id === action.payload.id ? action.payload : card
+        ),
+      };
       break;
     case "reset":
       const ok = confirm("Voulez-vous vraiment vider ce barillet ?");
       if (ok) {
-        newState = [];
+        newState = { name: "", impros: [] };
       }
       break;
     case "replace":
-      newState = [...action.payload];
+      newState = { ...state, ...action.payload };
+      break;
+    case "rename":
+      newState = {
+        name: action.payload.substring(0, 50),
+        impros: state.impros,
+      };
       break;
   }
 
@@ -44,15 +59,11 @@ function getBarilletFromUrlParams() {
 
   if (barilletDataBase64) {
     try {
-      console.log("DECODING");
-      console.log(barilletDataBase64);
-
       const decodedJson = LZUTF8.decompress(barilletDataBase64, {
         inputEncoding: "Base64",
       });
 
       const data = JSON.parse(decodedJson);
-      console.log("new barillet", data);
       return data;
     } catch (err) {
       // Ignore invalid base64 strings
@@ -87,14 +98,16 @@ function getBarilletFromUrlParams() {
  */
 
 export default function Home() {
-  const [barillet, dispatchBarillet] = useReducer(barilletReducer, []);
+  const [barillet, dispatchBarillet] = useReducer(barilletReducer, {
+    name: "",
+    impros: [],
+  });
   const [view, setView] = useState("editor");
 
   // initialize barillet
   useEffect(() => {
-    const barilletFromStorage = JSON.parse(
-      localStorage.getItem("barillet") || "[]"
-    );
+    const storedData = localStorage.getItem("barillet");
+    const barilletFromStorage = storedData && JSON.parse(storedData);
     const barilletFromURL = getBarilletFromUrlParams();
     const initBarillet = barilletFromURL || barilletFromStorage;
 

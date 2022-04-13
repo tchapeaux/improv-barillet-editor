@@ -9,9 +9,9 @@ export const BUBBLE_STATES = {
   EMPTY: "empty",
 };
 
-export default function LiveProgress({ barillet, alreadySeenIds }) {
+export default function LiveProgress({ alreadySeenIds, impros }) {
   const alreadySeenCards = [...alreadySeenIds].map((id) =>
-    barillet.find((impro) => impro.id === id)
+    impros.find((impro) => impro.id === id)
   );
 
   const alreadySeenM = alreadySeenCards.filter((impro) => impro.nature === "M");
@@ -28,12 +28,12 @@ export default function LiveProgress({ barillet, alreadySeenIds }) {
     <div className="live-progress">
       <div className="live-progress-bubbles">
         <p>{alreadySeenIds.size}</p>
-        {barillet
+        {impros
           .filter((impro) => alreadySeenIds.has(impro.id))
           .map((impro) => (
             <Bubble key={impro.id} state={BUBBLE_STATES.SEEN} />
           ))}
-        {barillet
+        {impros
           .filter((impro) => !alreadySeenIds.has(impro.id))
           .map((impro) => (
             <Bubble key={impro.id} state={BUBBLE_STATES.EMPTY} />

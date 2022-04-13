@@ -1,9 +1,15 @@
-.barillet-view-options {
-  padding-bottom: 1rem;
+.editor-title {
+  font-size: 2em;
+}
 
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
+
+input.barillet-name {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  color: var(--text-main);
 }
 
 .barillet-grid {

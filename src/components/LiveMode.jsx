@@ -10,21 +10,22 @@ function randomIntUpTo(max) {
 }
 
 export default function LiveMode({ barillet }) {
-  const count = barillet.length;
+  const { impros, name } = barillet;
+  const count = impros.length;
   const [currentId, setCurrentId] = useState(null);
   const alreadySeenIds = useRef(new Set());
 
   function reset() {
     alreadySeenIds.current = new Set();
     const randomTheme =
-      barillet.length > 0 ? barillet[randomIntUpTo(count - 1)] : null;
+      impros.length > 0 ? impros[randomIntUpTo(count - 1)] : null;
     setCurrentId(randomTheme ? randomTheme.id : null);
   }
 
-  useEffect(reset, [barillet]);
+  useEffect(reset, [impros]);
   useEffect(() => window.scrollTo({ top: 0 }), []);
 
-  if (barillet.length === 0) {
+  if (impros.length === 0) {
     return "Votre barillet est vide";
   }
 
@@ -34,7 +35,7 @@ export default function LiveMode({ barillet }) {
   }
 
   function getNextId() {
-    const remainingIds = barillet
+    const remainingIds = impros
       .map((t) => t.id)
       .filter((id) => !alreadySeenIds.current.has(id));
 
@@ -54,7 +55,7 @@ export default function LiveMode({ barillet }) {
   function onSkip() {
     let nextId = getNextId();
     // Avoid choosing the same card again
-    const remainingIds = barillet
+    const remainingIds = impros
       .map((t) => t.id)
       .filter((id) => !alreadySeenIds.current.has(id));
 
@@ -65,29 +66,27 @@ export default function LiveMode({ barillet }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const currentTheme = barillet.find((t) => t.id === currentId);
-  const hasSeenAllThemes = alreadySeenIds.current.size === barillet.length;
+  const currentTheme = impros.find((t) => t.id === currentId);
+  const hasSeenAllThemes = alreadySeenIds.current.size === impros.length;
+
+  if (hasSeenAllThemes) {
+    return (
+      <div className="live-menu-end">
+        <p>Vous avez vu tous les thèmes !</p>
+        <button onClick={reset}>Recommencer</button>
+      </div>
+    );
+  }
 
   return (
     <>
-      {hasSeenAllThemes ? (
-        <div className="live-menu-end">
-          <p>Vous avez vu tous les thèmes !</p>
-          <button onClick={reset}>Recommencer</button>
-        </div>
-      ) : (
-        <>
-          <ThemeCard theme={currentTheme} />
-          <LiveProgress
-            alreadySeenIds={alreadySeenIds.current}
-            barillet={barillet}
-          />
-          <div className="live-menu-controls">
-            <button onClick={onSkip}>Garder pour plus tard</button>
-            <button onClick={onNext}>Impro suivante</button>
-          </div>
-        </>
-      )}
+      <h1 className="live-title">{name}</h1>
+      <ThemeCard theme={currentTheme} />
+      <LiveProgress alreadySeenIds={alreadySeenIds.current} impros={impros} />
+      <div className="live-menu-controls">
+        <button onClick={onSkip}>Garder pour plus tard</button>
+        <button onClick={onNext}>Impro suivante</button>
+      </div>
     </>
   );
 }

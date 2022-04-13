@@ -19,22 +19,39 @@ import {
 } from "../utils/data";
 
 export default function Editor({ barillet, dispatchBarillet }) {
-  const countThemes = barillet.length;
-  const countM = barillet.filter((t) => t.nature === "M").length;
-  const countC = barillet.filter((t) => t.nature === "C").length;
-  const countL = barillet.filter((t) => t.categorie === "L").length;
-  const countNotL = barillet.filter((t) => t.categorie !== "L").length;
+  const { name, impros } = barillet;
+  const countThemes = impros.length;
+  const countM = impros.filter((t) => t.nature === "M").length;
+  const countC = impros.filter((t) => t.nature === "C").length;
+  const countL = impros.filter((t) => t.categorie === "L").length;
+  const countNotL = impros.filter((t) => t.categorie !== "L").length;
 
   const [viewType, setViewType] = useState("grid");
   const [isCopied, setIsCopied] = useState(false);
 
   return (
     <>
+      <h1 className="editor-title">Éditeur de barillets</h1>
       <div className="barillet-options">
         {countThemes > 0 ? (
-          <button onClick={() => dispatchBarillet({ type: "reset" })}>
-            ♻️ Vider
-          </button>
+          <>
+            <input
+              className="barillet-name"
+              placeholder="Nom du barillet..."
+              onChange={({ target: { value: newValue } }) =>
+                dispatchBarillet({ type: "rename", payload: newValue })
+              }
+              value={name}
+            />
+            <button onClick={() => dispatchBarillet({ type: "reset" })}>
+              ♻️ Vider
+            </button>
+            <button
+              onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
+            >
+              👁️ {viewType == "grid" ? "List" : "Grid"}
+            </button>{" "}
+          </>
         ) : (
           <>
             <button
@@ -71,7 +88,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
           </>
         )}
       </div>
-      {barillet.length === 0 ? (
+      {impros.length === 0 ? (
         <div className="import-from-json">
           {"Charger depuis un JSON"}
           <input
@@ -91,19 +108,11 @@ export default function Editor({ barillet, dispatchBarillet }) {
           />
         </div>
       ) : null}
-      {barillet.length > 0 ? (
+      {impros.length > 0 ? (
         <>
-          <div className="barillet-view-options">
-            <button
-              onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
-            >
-              👁️ {viewType == "grid" ? "List" : "Grid"}
-            </button>
-          </div>
-
           {viewType === "grid" ? (
             <div className="barillet-grid">
-              {barillet.map((card) => (
+              {impros.map((card) => (
                 <ThemeCard
                   key={card.id}
                   onDelete={() =>
@@ -120,10 +129,9 @@ export default function Editor({ barillet, dispatchBarillet }) {
               ))}
             </div>
           ) : null}
-
           {viewType === "list" ? (
             <div className="barillet-list">
-              {barillet.map((theme) => {
+              {impros.map((theme) => {
                 const onUpdateProp = (propName, propValue) => {
                   dispatchBarillet({
                     type: "update",
