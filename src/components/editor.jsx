@@ -100,7 +100,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
                   content &&
                   dispatchBarillet({
                     type: "replace",
-                    payload: JSON.parse(content).map((t) => new Theme(t)),
+                    payload: JSON.parse(content),
                   })
               )
             }
