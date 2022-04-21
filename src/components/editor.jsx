@@ -49,7 +49,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
             <button
               onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
             >
-              👁️ {viewType == "grid" ? "List" : "Grid"}
+              👁️ {viewType == "grid" ? "Liste" : "Grille"}
             </button>{" "}
           </>
         ) : (
