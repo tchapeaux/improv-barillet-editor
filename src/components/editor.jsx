@@ -1,210 +1,69 @@
 import React, { useState } from "react";
 
-import { downloadObjectAsJson, readSingleFile } from "../utils/file-io.js";
+import { downloadObjectAsJson } from "../utils/file-io.js";
 import { copyDataURL } from "../utils/copy-data-url";
 
-import {
-  CateRatioCheck,
-  NatureRatioCheck,
-  TotalCardsCheck,
-} from "./CheckIndicator.jsx";
-import ThemeCard from "./theme-card.jsx";
-
-import Theme from "../utils/theme.js";
-
-import {
-  CARD_PLACEHOLDERS,
-  FBIA_DEFAULT_BARILLET,
-  SMALL_BARILLET,
-} from "../utils/data";
+import ValidityIndicators from "./CheckIndicator.jsx";
+import TitleHeader from "./Editor/TitleHeader.jsx";
+import EmptyState from "./Editor/EmptyState.jsx";
+import GridView from "./Editor/GridView.jsx";
+import ListView from "./Editor/ListView.jsx";
 
 export default function Editor({ barillet, dispatchBarillet }) {
   const { name, impros } = barillet;
-  const countThemes = impros.length;
-  const countM = impros.filter((t) => t.nature === "M").length;
-  const countC = impros.filter((t) => t.nature === "C").length;
-  const countL = impros.filter((t) => t.categorie === "L").length;
-  const countNotL = impros.filter((t) => t.categorie !== "L").length;
+  const isEmpty = impros.length === 0;
 
   const [viewType, setViewType] = useState("grid");
   const [isCopied, setIsCopied] = useState(false);
 
+  const onRenameBarillet = ({ target: { value: newValue } }) =>
+    dispatchBarillet({ type: "rename", payload: newValue });
+
+  const onReplaceBarillet = (newBarillet) =>
+    dispatchBarillet({
+      type: "replace",
+      payload: newBarillet,
+    });
+
+  const onResetBarillet = () => dispatchBarillet({ type: "reset" });
+
+  const onUpdateImpro = (newTheme, improId) =>
+    dispatchBarillet({
+      type: "update",
+      payload: { ...newTheme, id: improId },
+    });
+
+  const onDeleteImpro = (improId) =>
+    dispatchBarillet({ type: "remove", payload: improId });
+
   return (
     <>
       <h1 className="editor-title">Éditeur de barillets</h1>
-      <div className="barillet-options">
-        {countThemes > 0 ? (
-          <>
-            <input
-              className="barillet-name"
-              placeholder="Nom du barillet..."
-              onChange={({ target: { value: newValue } }) =>
-                dispatchBarillet({ type: "rename", payload: newValue })
-              }
-              value={name}
-            />
-            <button onClick={() => dispatchBarillet({ type: "reset" })}>
-              ♻️ Vider
-            </button>
-            <button
-              onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
-            >
-              👁️ {viewType == "grid" ? "Liste" : "Grille"}
-            </button>{" "}
-          </>
-        ) : (
-          <>
-            <button
-              onClick={() =>
-                dispatchBarillet({
-                  type: "replace",
-                  payload: CARD_PLACEHOLDERS,
-                })
-              }
-            >
-              Exemple
-            </button>
-
-            <button
-              onClick={() =>
-                dispatchBarillet({
-                  type: "replace",
-                  payload: FBIA_DEFAULT_BARILLET,
-                })
-              }
-            >
-              Barillet complet
-            </button>
-            <button
-              onClick={() =>
-                dispatchBarillet({
-                  type: "replace",
-                  payload: SMALL_BARILLET,
-                })
-              }
-            >
-              Demi-barillet
-            </button>
-          </>
-        )}
-      </div>
-      {impros.length === 0 ? (
-        <div className="import-from-json">
-          {"Charger depuis un JSON"}
-          <input
-            accept=".json,application/json"
-            onChange={(e) =>
-              readSingleFile(
-                e,
-                (err, content) =>
-                  content &&
-                  dispatchBarillet({
-                    type: "replace",
-                    payload: JSON.parse(content),
-                  })
-              )
-            }
-            type="file"
-          />
-        </div>
-      ) : null}
-      {impros.length > 0 ? (
+      <TitleHeader
+        isEmpty={isEmpty}
+        onRenameBarillet={onRenameBarillet}
+        onReplaceBarillet={onReplaceBarillet}
+        onResetBarillet={onResetBarillet}
+        name={name}
+        setViewType={setViewType}
+        viewType={viewType}
+      />
+      {isEmpty ? <EmptyState onReplaceBarillet={onReplaceBarillet} /> : null}
+      {!isEmpty ? (
         <>
           {viewType === "grid" ? (
-            <div className="barillet-grid">
-              {impros.map((card) => (
-                <ThemeCard
-                  key={card.id}
-                  onDelete={() =>
-                    dispatchBarillet({ type: "remove", payload: card.id })
-                  }
-                  onChangeTheme={(newTheme) =>
-                    dispatchBarillet({
-                      type: "update",
-                      payload: { ...newTheme, id: card.id },
-                    })
-                  }
-                  theme={card}
-                />
-              ))}
-            </div>
+            <GridView
+              impros={impros}
+              onDeleteImpro={onDeleteImpro}
+              onUpdateImpro={onUpdateImpro}
+            />
           ) : null}
           {viewType === "list" ? (
-            <div className="barillet-list">
-              <div className="list-row row-title">
-                <span></span>
-                <span>Nat</span>
-                <span>Titre</span>
-                <span>Nombre</span>
-                <span>Catégorie</span>
-                <span>Durée</span>
-                <span>Divers</span>
-              </div>
-              {impros.map((theme) => {
-                const onUpdateProp = (propName, propValue) => {
-                  dispatchBarillet({
-                    type: "update",
-                    payload: { ...theme, [propName]: propValue },
-                  });
-                };
-
-                return (
-                  <div className="list-row" key={theme.id}>
-                    <button
-                      className="list-del-btn"
-                      onClick={() =>
-                        dispatchBarillet({ type: "remove", payload: theme.id })
-                      }
-                      title="Supprimer"
-                    >
-                      ❌
-                    </button>
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("nature", value)
-                      }
-                      value={theme.nature}
-                    />
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("titre", value)
-                      }
-                      value={theme.titre}
-                    />
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("nbJ", value)
-                      }
-                      value={theme.nbJ}
-                    />
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("categorie", value)
-                      }
-                      value={theme.categorie}
-                    />
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("duree", value)
-                      }
-                      value={theme.duree}
-                    />
-                    <input
-                      type="text"
-                      onChange={({ target: { value } }) =>
-                        onUpdateProp("extra", value)
-                      }
-                      value={theme.extra}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <ListView
+              impros={impros}
+              onDeleteImpro={onDeleteImpro}
+              onUpdateImpro={onUpdateImpro}
+            />
           ) : null}
         </>
       ) : null}
@@ -215,29 +74,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
         Ajouter une impro
       </button>
       <div className="barillet-summary">
-        <TotalCardsCheck nbOfThemes={countThemes} />
-        {countThemes > 0 ? (
-          <>
-            <NatureRatioCheck
-              nbOfC={countC}
-              nbOfM={countM}
-              nbOfThemes={countThemes}
-            />
-            <CateRatioCheck
-              nbOfCate={countNotL}
-              nbOfL={countL}
-              nbOfThemes={countThemes}
-            />
-            <div>
-              <a
-                href="https://drive.google.com/file/d/1LhHamiDoLfvjBT-eljnxLvvovdtNO5Tv/view?usp=sharing"
-                target="_blank"
-              >
-                Liste des catégories
-              </a>
-            </div>
-          </>
-        ) : null}
+        <ValidityIndicators impros={impros} />
       </div>
       <div className="barillet-options">
         <button
