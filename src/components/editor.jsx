@@ -48,25 +48,25 @@ export default function Editor({ barillet, dispatchBarillet }) {
         setViewType={setViewType}
         viewType={viewType}
       />
-      {isEmpty ? <EmptyState onReplaceBarillet={onReplaceBarillet} /> : null}
-      {!isEmpty ? (
+      {isEmpty && <EmptyState onReplaceBarillet={onReplaceBarillet} />}
+      {!isEmpty && (
         <>
-          {viewType === "grid" ? (
+          {viewType === "grid" && (
             <GridView
               impros={impros}
               onDeleteImpro={onDeleteImpro}
               onUpdateImpro={onUpdateImpro}
             />
-          ) : null}
-          {viewType === "list" ? (
+          )}
+          {viewType === "list" && (
             <ListView
               impros={impros}
               onDeleteImpro={onDeleteImpro}
               onUpdateImpro={onUpdateImpro}
             />
-          ) : null}
+          )}
         </>
-      ) : null}
+      )}
       <button
         className="add-card-btn"
         onClick={() => dispatchBarillet({ type: "add" })}

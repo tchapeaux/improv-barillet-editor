@@ -73,17 +73,17 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
           placeholder="Ajouter des infos suppl. ici"
           value={theme.extra}
         ></textarea>
-        {urlsInExtra && urlsInExtra.length > 0 ? (
+        {urlsInExtra && urlsInExtra.length > 0 && (
           <a href={urlsInExtra[0]} target="_blank">
             link
           </a>
-        ) : null}
+        )}
 
-        {onDelete ? (
+        {onDelete && (
           <button className="del-card-btn" onClick={onDelete}>
             supprimer
           </button>
-        ) : null}
+        )}
       </div>
     </>
   );

@@ -54,7 +54,7 @@ export default function ValidityIndicators({ impros }) {
   return (
     <>
       <TotalCardsCheck nbOfThemes={countThemes} />
-      {countThemes > 0 ? (
+      {countThemes > 0 && (
         <>
           <NatureRatioCheck
             nbOfC={countC}
@@ -75,7 +75,7 @@ export default function ValidityIndicators({ impros }) {
             </a>
           </div>
         </>
-      ) : null}
+      )}
     </>
   );
 }
