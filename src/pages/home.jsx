@@ -5,25 +5,57 @@ import Editor from "../components/editor";
 import Theme from "../utils/theme.js";
 import LiveMode from "../components/LiveMode";
 
+function sortBarillet(i1, i2) {
+  // Sort by attributes
+  // Mixte - Libre
+  // Mixte - Categorie
+  // Comparee - Libre
+  // Comparee - Categorie
+
+  if (i1.nature === "M" && i2.nature !== "M") {
+    return -1;
+  }
+  if (i1.nature !== "M" && i2.nature === "M") {
+    return 1;
+  }
+
+  if (i1.categorie === "L" && i2.nature !== "L") {
+    return -1;
+  }
+  if (i1.categorie !== "L" && i2.nature === "L") {
+    return 1;
+  }
+
+  if (i1.titre < i2.titre) {
+    return -1;
+  }
+  if (i1.titre > i2.titre) {
+    return 1;
+  }
+  if (i1.titre === i2.titre) {
+    return 0;
+  }
+}
+
 function barilletReducer(state, action) {
   let newState = state;
 
   switch (action.type) {
     case "add":
       newState = {
-        name: state.name,
+        ...state,
         impros: [...state.impros, new Theme(action.payload)],
       };
       break;
     case "remove":
       newState = {
-        name: state.name,
+        ...state,
         impros: state.impros.filter((card) => card.id !== action.payload),
       };
       break;
     case "update":
       newState = {
-        name: state.name,
+        ...state,
         impros: state.impros.map((card) =>
           card.id === action.payload.id ? action.payload : card
         ),
@@ -44,6 +76,11 @@ function barilletReducer(state, action) {
         impros: state.impros,
       };
       break;
+    case "sort":
+      newState = {
+        ...state,
+        impros: state.impros.sort(sortBarillet),
+      };
   }
 
   if (newState !== undefined && newState !== state) {

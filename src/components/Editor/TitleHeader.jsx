@@ -11,6 +11,7 @@ export default function TitleHeader({
   onRenameBarillet,
   onReplaceBarillet,
   onResetBarillet,
+  onSortBarillet,
   name,
   setViewType,
   viewType,
@@ -32,6 +33,7 @@ export default function TitleHeader({
             >
               👁️ {viewType == "grid" ? "Liste" : "Grille"}
             </button>
+            <button onClick={onSortBarillet}>⬇ Trier</button>
           </>
         ) : (
           <>

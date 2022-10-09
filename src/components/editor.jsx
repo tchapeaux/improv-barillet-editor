@@ -36,6 +36,8 @@ export default function Editor({ barillet, dispatchBarillet }) {
   const onDeleteImpro = (improId) =>
     dispatchBarillet({ type: "remove", payload: improId });
 
+  const onSortBarillet = () => dispatchBarillet({ type: "sort" });
+
   return (
     <>
       <h1 className="editor-title">Éditeur de barillets</h1>
@@ -44,6 +46,7 @@ export default function Editor({ barillet, dispatchBarillet }) {
         onRenameBarillet={onRenameBarillet}
         onReplaceBarillet={onReplaceBarillet}
         onResetBarillet={onResetBarillet}
+        onSortBarillet={onSortBarillet}
         name={name}
         setViewType={setViewType}
         viewType={viewType}
