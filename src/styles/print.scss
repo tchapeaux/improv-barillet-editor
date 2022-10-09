@@ -55,8 +55,13 @@
       .cate-not-libre {
         background-color: #ddd;
         color: var(--print-text-color);
+        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
       }
+    }
+
+    .btn-barillet-launch {
+      display: none;
     }
   }
 }
