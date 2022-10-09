@@ -37,6 +37,8 @@ export default function Home() {
         <div className="links">
           <Link href="/">Éditeur</Link>
           <span className="divider">|</span>
+          <Link href="/name-generator">Générateur de prénoms</Link>
+          <span className="divider">|</span>
           <Link href="/about">À Propos</Link>
         </div>
       </footer>
