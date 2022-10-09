@@ -150,6 +150,15 @@ export default function Editor({ barillet, dispatchBarillet }) {
 
                 return (
                   <div className="list-row" key={theme.id}>
+                    <button
+                      className="list-del-btn"
+                      onClick={() =>
+                        dispatchBarillet({ type: "remove", payload: theme.id })
+                      }
+                      title="Supprimer"
+                    >
+                      ❌
+                    </button>
                     <input
                       type="text"
                       onChange={({ target: { value } }) =>
