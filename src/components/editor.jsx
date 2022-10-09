@@ -131,6 +131,15 @@ export default function Editor({ barillet, dispatchBarillet }) {
           ) : null}
           {viewType === "list" ? (
             <div className="barillet-list">
+              <div className="list-row row-title">
+                <span></span>
+                <span>Nat</span>
+                <span>Titre</span>
+                <span>Nombre</span>
+                <span>Catégorie</span>
+                <span>Durée</span>
+                <span>Divers</span>
+              </div>
               {impros.map((theme) => {
                 const onUpdateProp = (propName, propValue) => {
                   dispatchBarillet({
