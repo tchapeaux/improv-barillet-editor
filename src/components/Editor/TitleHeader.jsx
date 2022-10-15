@@ -37,8 +37,9 @@ export default function TitleHeader({
           </>
         ) : (
           <>
+          <p>Créer depuis un modèle :</p> 
             <button onClick={() => onReplaceBarillet(CARD_PLACEHOLDERS)}>
-              Exemple
+              Petit Exemple
             </button>
 
             <button onClick={() => onReplaceBarillet(FBIA_DEFAULT_BARILLET)}>
