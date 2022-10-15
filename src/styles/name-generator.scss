@@ -1,0 +1,18 @@
+.names-buttons-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+  }
+}
+
+.generated-names-list {
+  list-style: none;
+
+  li {
+    font-size: 1.3rem;
+  }
+}
