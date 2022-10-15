@@ -8,6 +8,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "json2csv": "^5.0.7",
     "lodash.range": "^3.2.0",
     "lzutf8": "^0.6.0",
     "react": "^17.0.2",

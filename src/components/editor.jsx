@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { downloadObjectAsJson } from "../utils/file-io.js";
+import { downloadObjectAsJson, downloadObjectAsCsv } from "../utils/file-io.js";
 import { copyDataURL } from "../utils/copy-data-url";
 
 import ValidityIndicators from "./CheckIndicator.jsx";
@@ -89,6 +89,11 @@ export default function Editor({ barillet, dispatchBarillet }) {
           }
         >
           💾 Sauvegarder en JSON
+        </button>
+        <button
+          onClick={() => downloadObjectAsCsv(barillet.impros, barillet.name)}
+        >
+          💾 Sauvegarder en CSV
         </button>
         <button
           onClick={() => {
