@@ -26,8 +26,6 @@ export function downloadObjectAsCsv(exportArray, exportName) {
     "data:text/csv;charset=utf-8," +
     encodeURIComponent(json2csv(exportArray, opts));
 
-  console.log(dataStr);
-
   downloadObject(dataStr, exportName + ".csv");
 }
 
