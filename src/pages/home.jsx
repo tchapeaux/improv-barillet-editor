@@ -19,10 +19,10 @@ function sortBarillet(i1, i2) {
     return 1;
   }
 
-  if (i1.categorie === "L" && i2.nature !== "L") {
+  if (i1.categorie === "L" && i2.categorie !== "L") {
     return -1;
   }
-  if (i1.categorie !== "L" && i2.nature === "L") {
+  if (i1.categorie !== "L" && i2.categorie === "L") {
     return 1;
   }
 
