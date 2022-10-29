@@ -51,6 +51,12 @@ h1 {
 }
 
 button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   cursor: pointer;
   font-size: var(--fs-md);
   padding: 0.5rem 1rem;

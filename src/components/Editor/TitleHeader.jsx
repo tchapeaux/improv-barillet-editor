@@ -1,4 +1,5 @@
 import React from "react";
+import * as LucideIcons from "lucide-react";
 
 import {
   CARD_PLACEHOLDERS,
@@ -27,17 +28,31 @@ export default function TitleHeader({
               onChange={onRenameBarillet}
               value={name}
             />
-            <button onClick={onResetBarillet}>♻️ Vider</button>
+            <button onClick={onResetBarillet}>
+              <LucideIcons.Trash2 /> Vider
+            </button>
             <button
               onClick={() => setViewType(viewType === "grid" ? "list" : "grid")}
             >
-              👁️ {viewType == "grid" ? "Liste" : "Grille"}
+              {viewType == "grid" ? (
+                <>
+                  <LucideIcons.List /> Liste
+                </>
+              ) : (
+                <>
+                  <LucideIcons.Grid />
+                  Grille
+                </>
+              )}
             </button>
-            <button onClick={onSortBarillet}>⬇ Trier</button>
+            <button onClick={onSortBarillet}>
+              <LucideIcons.SortDesc />
+              Trier
+            </button>
           </>
         ) : (
           <>
-          <p>Créer depuis un modèle :</p> 
+            <p>Créer depuis un modèle :</p>
             <button onClick={() => onReplaceBarillet(CARD_PLACEHOLDERS)}>
               Petit Exemple
             </button>

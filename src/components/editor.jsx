@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as LucideIcons from "lucide-react";
 
 import { downloadObjectAsJson, downloadObjectAsCsv } from "../utils/file-io.js";
 import { copyDataURL } from "../utils/copy-data-url";
@@ -88,12 +89,12 @@ export default function Editor({ barillet, dispatchBarillet }) {
             )
           }
         >
-          💾 Sauvegarder en JSON
+          <LucideIcons.Save /> Sauvegarder en JSON
         </button>
         <button
           onClick={() => downloadObjectAsCsv(barillet.impros, barillet.name)}
         >
-          💾 Sauvegarder en CSV
+          <LucideIcons.Save /> Sauvegarder en CSV
         </button>
         <button
           onClick={() => {
@@ -102,9 +103,17 @@ export default function Editor({ barillet, dispatchBarillet }) {
             setTimeout(() => setIsCopied(false), 3000);
           }}
         >
-          {isCopied
-            ? "✅ Copié dans le presse-papier"
-            : "🔗 Partager une copie"}
+          {isCopied ? (
+            <>
+              <LucideIcons.Check color="green" />
+              Copié dans le presse-papier
+            </>
+          ) : (
+            <>
+              <LucideIcons.Link />
+              Partager une copie
+            </>
+          )}
         </button>
       </div>
     </>

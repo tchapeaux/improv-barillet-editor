@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
+import * as LucideIcons from "lucide-react";
 import LZUTF8 from "lzutf8";
 
 import Editor from "../components/editor";
@@ -162,14 +163,16 @@ export default function Home() {
             className="btn-barillet-launch"
             onClick={() => setView("liveMode")}
           >
-            🚂 Lancer le barillet
+            <LucideIcons.Bike />
+            Lancer le barillet
           </button>
         </>
       ) : (
         <>
           <LiveMode barillet={barillet} />
           <button onClick={() => setView("editor")}>
-            🔙 Revenir à l'éditeur
+            <LucideIcons.Home />
+            Revenir à l'éditeur
           </button>
         </>
       )}
