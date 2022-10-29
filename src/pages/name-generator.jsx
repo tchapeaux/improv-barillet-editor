@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as LucideIcons from "lucide-react";
 
 import UNGENDERED_NAMES from "../utils/liste-names-mixtes-cosmo.js";
 
@@ -36,7 +37,9 @@ export default function NameGenerator() {
 
   return (
     <div className="page">
-      <h1 className="title">Générateur de Prénoms 📛</h1>
+      <h1 className="editor-title">
+        <LucideIcons.Tag /> Générateur de Prénoms
+      </h1>
 
       <header>
         <p>
