@@ -4,6 +4,8 @@
     background-color: var(--print-bg-color);
     color: var(--print-text-color);
 
+    font-size: 2rem;
+
     .barillet-options,
     .barillet-summary,
     .footer {
@@ -16,7 +18,7 @@
 
     .add-card-btn,
     .del-card-btn {
-      visibility: hidden;
+      display: none;
     }
 
     .barillet {
