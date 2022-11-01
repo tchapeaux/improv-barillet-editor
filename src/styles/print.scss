@@ -35,7 +35,8 @@
     }
 
     .theme-card {
-      page-break-inside: avoid;
+      break-after: page;
+      page-break-after: always;
       border: 1px solid var(--print-text-color);
     }
 
@@ -56,6 +57,10 @@
 
       .extra::placeholder {
         color: transparent;
+      }
+
+      .url-in-extra {
+        display: none;
       }
 
       .cate-not-libre {

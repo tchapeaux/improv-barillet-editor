@@ -74,7 +74,7 @@ export default function ThemeCard({ theme, onChangeTheme, onDelete }) {
           value={theme.extra}
         ></textarea>
         {urlsInExtra && urlsInExtra.length > 0 && (
-          <a href={urlsInExtra[0]} target="_blank">
+          <a className="url-in-extra" href={urlsInExtra[0]} target="_blank">
             link
           </a>
         )}
