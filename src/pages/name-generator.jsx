@@ -37,18 +37,18 @@ export default function NameGenerator() {
 
   return (
     <div className="page">
-      <h1 className="editor-title">
-        <LucideIcons.Tag /> Générateur de Prénoms
-      </h1>
-
       <header>
-        <p>
+        <h1 className="editor-title">
+          <LucideIcons.Tag /> Générateur de Prénoms
+        </h1>
+
+        <p className="instructions">
           Cette page vous permet de générer des prénoms à utiliser dans vos
           titres. Prenez garde à la parité des personnages proposés.
         </p>
 
+        <p>Choisissez une catégorie :</p>
         <div className="names-buttons-row">
-          Générer des noms :
           <button
             onClick={() => setListOfNames(getNewListOfNames(GENDERED_NAMES))}
           >

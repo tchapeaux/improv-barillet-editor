@@ -1,5 +1,5 @@
 import * as React from "react";
-/* ADD IMPORTS FROM TODO ON THE NEXT LINE */
+import * as LucideIcons from "lucide-react";
 
 /**
  * The About function defines the component that makes up the About page
@@ -12,7 +12,7 @@ export default function About() {
       <h1 className="editor-title">À Propos</h1>
 
       <div className="instructions">
-        <h2>Mais qu'est-ce que c'est</h2>
+        <h2>Aperçu</h2>
         <p>
           Cet outil vous permet de créer, partager et utiliser des barillets
           pour des matchs d'improvisation.
@@ -28,40 +28,52 @@ export default function About() {
         <p>
           Cet outil est gratuit, n'utilise aucun cookies ni autre méthode de
           tracking des visiteurs. Si vous l'appréciez, ou si vous voulez
-          suggérer une amélioration, vous pouvez me contacter à<br />
-          chapeauxthomas AT gmail POINT com.
+          suggérer une amélioration, vous pouvez me contacter à{" "}
+          <code>chapeauxthomas AT gmail POINT com</code>.
+        </p>
+
+        <h2>Comment exporter un barillet ?</h2>
+
+        <p>
+          L'impression depuis le navigateur n'est pas toujours idéale. La
+          procédure suivante donne un résultat acceptable:
+        </p>
+
+        <ul>
+          <li>Utilisez le navigateur Google Chrome</li>
+          <li>
+            Mettez l'éditeur en mode <LucideIcons.Grid /> Grille
+          </li>
+          <li>Appuyez sur CTRL+P ou CMD+P pour basculer en mode impression</li>
+          <li>
+            Choisissez le format "Payage" et "plusieurs pages par feuille"
+          </li>
+        </ul>
+
+        <h2>Crédits</h2>
+        <p>
+          Web app par 🐢{" "}
+          <a href="https://github.com/tchapeaux" target="_blank">
+            tchapeaux
+          </a>{" "}
+          et 🎨 Banjopalmo.
+        </p>
+
+        <p>
+          Hébergé par{" "}
+          <a href="https://vercel.com" target="_blank">
+            Vercel
+          </a>
+          , code source disponible{" "}
+          <a
+            href="https://github.com/tchapeaux/improv-barillet-editor"
+            target="_blank"
+          >
+            sur Github
+          </a>
+          .
         </p>
       </div>
-
-      <h2>Qui a fait ça</h2>
-      <p>
-        👯‍♂️ Web app par 🐢{" "}
-        <a href="https://github.com/tchapeaux" target="_blank">
-          tchapeaux
-        </a>{" "}
-        et 🎨 Banjopalmo.
-      </p>
-      <p>
-        🦓 Envie de faire de l'impro à Bruxelles ? Va voir la{" "}
-        <a href="https://www.fbia.be" target="_blank">
-          FBIA
-        </a>
-        .
-      </p>
-      <p>
-        Hébergé par{" "}
-        <a href="https://vercel.com" target="_blank">
-          Vercel
-        </a>
-        , code source disponible{" "}
-        <a
-          href="https://github.com/tchapeaux/improv-barillet-editor"
-          target="_blank"
-        >
-          sur Github
-        </a>
-        .
-      </p>
     </div>
   );
 }
