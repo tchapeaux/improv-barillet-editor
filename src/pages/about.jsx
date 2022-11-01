@@ -9,7 +9,7 @@ import * as React from "react";
 export default function About() {
   return (
     <div className="page">
-      <h1 className="title">À Propos</h1>
+      <h1 className="editor-title">À Propos</h1>
 
       <div className="instructions">
         <h2>Mais qu'est-ce que c'est</h2>
