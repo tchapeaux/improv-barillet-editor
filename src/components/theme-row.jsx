@@ -1,4 +1,5 @@
 import React from "react";
+import * as LucideIcons from "lucide-react";
 
 export default function ThemeRow({ theme, onChangeTheme, onDelete }) {
   const onUpdateProp = (propName, propValue) => {
@@ -12,7 +13,7 @@ export default function ThemeRow({ theme, onChangeTheme, onDelete }) {
         onClick={() => onDelete(theme.id)}
         title="Supprimer"
       >
-        ❌
+        <LucideIcons.Trash2 color="var(--text-invalid)" />
       </button>
       <input
         type="text"
