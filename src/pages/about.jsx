@@ -32,14 +32,14 @@ export default function About() {
           <code>chapeauxthomas AT gmail POINT com</code>.
         </p>
 
-        <h2>Comment exporter un barillet ?</h2>
+        <h2>Comment imprimer un barillet ?</h2>
 
         <p>
           L'impression depuis le navigateur n'est pas toujours idéale. La
           procédure suivante donne un résultat acceptable:
         </p>
 
-        <ul>
+        <ol>
           <li>Utilisez le navigateur Google Chrome</li>
           <li>
             Mettez l'éditeur en mode <LucideIcons.Grid /> Grille
@@ -48,7 +48,34 @@ export default function About() {
           <li>
             Choisissez le format "Payage" et "plusieurs pages par feuille"
           </li>
-        </ul>
+        </ol>
+
+        <h2>Comment utiliser le barillet en spectacle ?</h2>
+
+        <p>
+          L'application permet également d'utiliser le barillet en spectacle
+          depuis votre smartphone.
+        </p>
+
+        <ol>
+          <li>
+            Transférez le barillet sur votre smartphone via l'export JSON ou le
+            lien de partage.
+          </li>
+          <li>
+            Appuyez sur "<LucideIcons.Bike /> Lancer le barillet" en bas de
+            l'éditeur.
+          </li>
+          <li>L'interface tire les impros une par une, au hasard.</li>
+          <li>
+            Si une impro ne vous convient pas, vous pouvez la "Garder pour plus
+            tard".
+          </li>
+          <li>
+            L'interface vous affiche la proportion de Mixte et Comparée, et de
+            Libre et Catégorie.
+          </li>
+        </ol>
 
         <h2>Crédits</h2>
         <p>
